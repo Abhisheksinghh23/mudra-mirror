@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Mudra Mirror</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<main class="app">
+  <header class="top">
+    <h1>Mudra Mirror</h1>
+    <p class="sub">Show a Bharatanatyam hasta to your camera. Everything runs on your device; no video leaves it.</p>
+  </header>
+
+  <section class="stage" aria-label="Camera">
+    <div class="viewport" id="viewport">
+      <video id="video" playsinline muted></video>
+      <canvas id="overlay"></canvas>
+      <div class="hud" id="hud" hidden>
+        <div class="hud-name" id="hudName">-</div>
+        <div class="hud-conf" id="hudConf"></div>
+      </div>
+      <div class="gamehud" id="gameHud" hidden>
+        <div class="gh-row"><span id="ghRound">Round 1/8</span><span id="ghScore">0 pts</span></div>
+        <div class="gh-time"><i id="ghBar"></i></div>
+      </div>
+      <div class="splash" id="splash">
+        <button id="startBtn" class="btn primary" type="button">Start camera</button>
+        <p id="status" class="status" role="status">The hand model (about 8 MB) downloads once from public CDNs the first time you start.</p>
+      </div>
+    </div>
+    <div class="row">
+      <button id="stopBtn" class="btn" type="button" hidden>Stop camera</button>
+      <label class="btn" for="photo">Try a photo
+        <input id="photo" type="file" accept="image/*" hidden>
+      </label>
+    </div>
+  </section>
+
+  <nav class="tabs" role="tablist">
+    <button class="tab on" id="tabLearn" role="tab" type="button">Learn</button>
+    <button class="tab" id="tabGame" role="tab" type="button">Mirror game</button>
+  </nav>
+
+  <section id="learnPane">
+    <div class="detail" id="detail">
+      <svg id="detailIcon" viewBox="0 0 120 150" width="96" height="120" aria-hidden="true"></svg>
+      <div>
+        <h2 id="dName">Pick a hasta</h2>
+        <p class="meaning" id="dMeaning"></p>
+        <p id="dHow">Tap one below to see how to form it, then try it on camera.</p>
+      </div>
+    </div>
+    <ul class="grid" id="grid"></ul>
+  </section>
+
+  <section id="gamePane" hidden>
+    <div class="target" id="target">
+      <svg id="targetIcon" viewBox="0 0 120 150" width="110" height="136" aria-hidden="true"></svg>
+      <div>
+        <p class="kicker" id="tKicker">Mirror game</p>
+        <h2 id="tName">Ready?</h2>
+        <p id="tHow">Eight rounds. Make the shown hasta and hold it for 0.8 seconds. Faster holds score more.</p>
+        <button class="btn primary" id="playBtn" type="button">Play</button>
+      </div>
+    </div>
+    <p class="best" id="best"></p>
+  </section>
+
+  <details class="about">
+    <summary>How it works and what to expect</summary>
+    <p>A hand-landmark model finds 21 points on your hand. A set of rules reads finger bends and touches to name one of 10 hastas: Pataka, Tripataka, Ardhapataka, Kartarimukha, Mayura, Hamsasya, Suchi, Chandrakala, Mushti and Shikhara.</p>
+    <ul>
+      <li>The rules follow common textbook descriptions. Schools differ, and a teacher's judgement beats this tool.</li>
+      <li>Accuracy is a prototype risk. It is checked on a small set of test hands, not on a large range of dancers, lighting and camera angles.</li>
+      <li>The score shown is a rule-based heuristic from 0 to 100. It is not a calibrated probability that the pose is right.</li>
+      <li>Works best with one hand, palm toward the camera, good light, plain background.</li>
+      <li>Similar pairs (Pataka and Tripataka, Suchi and Chandrakala) are the easiest to confuse.</li>
+    </ul>
+  </details>
+</main>
+<script type="module" src="app.js"></script>
+</body>
+</html>
